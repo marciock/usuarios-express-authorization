@@ -1,0 +1,27 @@
+version: "3.3"
+
+services: 
+    db:
+        image: mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: "MySql2019!"
+            MYSQL_DATABASE: "testedb"
+        volumes:
+            - ./backend/database:/var/lib/mysql
+        restart: always
+        environment: 
+        - MYSQL_ROOT_PASSWORD=password
+        - MYSQL_DATABASE=app_development
+    app:
+        
+        build: ./backend
+        restart: always
+        ports:
+            - "3000:3000"
+        working_dir: /usr/app
+        volumes:
+            - ./backend/:/usr/app 
+        depends_on: 
+            - db
+            
+                
